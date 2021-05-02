@@ -1,7 +1,7 @@
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
-import main.Boot;
+import main.Game;
 
 public class DesktopLauncher {
 
@@ -14,7 +14,7 @@ public class DesktopLauncher {
 		config.setWindowedMode(1280, 720);
 		config.setResizable(false);
 		//config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
-		new Lwjgl3Application(new Boot(), config);
+		new Lwjgl3Application(new Game(), config);
 	}
 	
 }

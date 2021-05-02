@@ -1,5 +1,5 @@
 package main;
-import com.badlogic.gdx.Game;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import main.input.Input;
 import main.input.Mouse;
 
-public class Boot extends Game {
+public class Game extends com.badlogic.gdx.Game {
 
 	private AssetManager manager;
 	private SpriteBatch batch;
@@ -27,7 +27,6 @@ public class Boot extends Game {
 		manager = new AssetManager();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(true, 1280, 720);
-		
 		mouse = new Mouse(0, 0);
 		input = new Input(mouse);
 		loadRenderer = new ShapeRenderer();
@@ -37,15 +36,16 @@ public class Boot extends Game {
 	
 	@Override
 	public void render() {
-		ScreenUtils.clear(Color.WHITE);
+		ScreenUtils.clear(Color.BLACK);
+		// Load anything there is to load
+		// if nothing to load -> update the screen
 		if(manager.update()) {			
 			camera.update();
 		}
-		loadRenderer.begin(ShapeType.Filled);
-		loadRenderer.setColor(Color.BLACK);
-		loadRenderer.rect(100, 100, 300, 300);
-		loadRenderer.end();
-		float progress = manager.getProgress();
+	}
+	
+	public AssetManager getAssets() {
+		return manager;
 	}
 	
 }
