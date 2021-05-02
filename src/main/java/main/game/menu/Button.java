@@ -1,12 +1,12 @@
-package main.game.entities.production;
+package main.game.menu;
 
-import main.game.entities.Unit;
+import main.game.GameObject;
 import main.utils.Point;
 
-public class Worker extends Unit {
+public class Button extends GameObject {
 
-	private Worker(Point pos) {
-		super(null, pos);
+	public Button(Point pos) {
+		super("res/button.png", pos);
 	}
 
 	@Override
@@ -21,4 +21,6 @@ public class Worker extends Unit {
 		
 	}
 
+	
+	
 }

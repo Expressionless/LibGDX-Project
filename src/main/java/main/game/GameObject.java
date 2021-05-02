@@ -1,11 +1,17 @@
 package main.game;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import main.utils.Point;
 
 public abstract class GameObject {
+	public static final ArrayList<GameObject> OBJECTS = new ArrayList<GameObject>();
+
+	protected static ShapeRenderer shapeRenderer = new ShapeRenderer();
 
 	protected Point pos;
 	protected Sprite sprite;
@@ -13,9 +19,11 @@ public abstract class GameObject {
 	protected abstract void draw();
 	protected abstract void step();
 	
-	public GameObject(Sprite sprite, Point pos) {
-		this.sprite = sprite;
+	public GameObject(String spriteRef, Point pos) {
+		//this.sprite = ;
 		this.pos = pos;
+		
+		OBJECTS.add(this);
 	}
 	
 	public void render(SpriteBatch batch) {

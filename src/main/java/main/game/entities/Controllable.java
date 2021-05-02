@@ -8,6 +8,7 @@ import main.utils.Point;
 public abstract class Controllable extends Entity {
 
 	public Controllable(Sprite sprite, Point pos) {
-		super(sprite, pos);
+		// TODO: Remove null
+		super(null, pos);
 	}
 }

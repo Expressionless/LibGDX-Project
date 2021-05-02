@@ -2,9 +2,9 @@ package main.game;
 
 import java.util.ArrayList;
 
-import main.game.entities.Building;
 import main.game.entities.Controllable;
-import main.game.entities.Unit;
+import main.game.entities.controllables.Building;
+import main.game.entities.controllables.Unit;
 
 public class Player {
 
