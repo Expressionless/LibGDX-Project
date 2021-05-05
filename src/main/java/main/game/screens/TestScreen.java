@@ -36,6 +36,10 @@ public class TestScreen extends Screen {
 			object.render(batch);
 		}
 		batch.end();
+		
+		for(GameObject object : GameObject.OBJECTS) {
+			object.update();
+		}
 	}
 
 }

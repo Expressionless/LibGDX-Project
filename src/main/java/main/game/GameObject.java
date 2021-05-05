@@ -49,4 +49,12 @@ public abstract class GameObject {
 		this.sprite = s;
 	}
 	
+	public static <T extends GameObject> T find(Class<T> searchClass) {
+		for(GameObject object : OBJECTS) {
+			if(searchClass.isInstance(object))
+				return (T)object;
+		}
+		return null;
+		
+	}
 }

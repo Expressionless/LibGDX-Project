@@ -3,18 +3,22 @@ package main.game.entities.controllables.unit.production;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
+import main.game.Entity;
 import main.game.GameObject;
 import main.game.entities.controllables.Unit;
+import main.game.entities.resources.Crystal;
 import main.utils.Point;
 
 public class Worker extends Unit {
 	
-	GameObject target = null;
+	private GameObject target = null;
 	
 	public Worker(Point pos) {
 		super(null, pos);
 		width = 12;
 		height = 12;
+		stats.setStat("inches", 5);
+		System.out.println(stats.getStat("inches"));
 	}
 
 	@Override
@@ -28,9 +32,10 @@ public class Worker extends Unit {
 
 	@Override
 	protected void step() {
-		// TODO Auto-generated method stub
 		if(target == null) {
-			GameObject.find(Crystal.class);
+			target = GameObject.find(Crystal.class);
+		} else {
+			this.move((Entity) target);
 		}
 	}
 
