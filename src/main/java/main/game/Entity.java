@@ -30,7 +30,8 @@ public abstract class Entity extends GameObject {
 		private float acc = 0;
 		private float defence;
 		private float attack;
-		private float inches;
+		
+		private float dickLength;
 		
 		public void setStat(String stat, float val) {
 			try {

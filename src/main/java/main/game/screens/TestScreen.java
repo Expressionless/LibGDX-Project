@@ -4,6 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import main.game.GameObject;
+import main.game.Player;
 import main.game.Screen;
 import main.game.entities.controllables.building.TownHall;
 import main.game.entities.controllables.unit.production.Worker;
@@ -14,11 +15,13 @@ public class TestScreen extends Screen {
 	
 	private GameObject worker;
 	private SpriteBatch batch;
+	private Player player;
 	
 	@Override
 	public void show() {
 		batch = new SpriteBatch();
-		worker = new Worker(new Point(50, 50));
+		player = new Player("Steve");
+		worker = new Worker(player, new Point(50, 50));
 		
 		new TownHall(new Point(100, 100));
 		

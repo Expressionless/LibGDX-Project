@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 import main.game.Entity;
 import main.game.GameObject;
+import main.game.Player;
 import main.game.entities.controllables.Unit;
+import main.game.entities.controllables.building.TownHall;
 import main.game.entities.resources.Crystal;
 import main.utils.Point;
 
@@ -13,12 +15,10 @@ public class Worker extends Unit {
 	
 	private GameObject target = null;
 	
-	public Worker(Point pos) {
-		super(null, pos);
+	public Worker(Player player, Point pos) {
+		super(null, player, pos);
 		width = 12;
 		height = 12;
-		stats.setStat("inches", 5);
-		System.out.println(stats.getStat("inches"));
 	}
 
 	@Override
@@ -33,9 +33,25 @@ public class Worker extends Unit {
 	@Override
 	protected void step() {
 		if(target == null) {
-			target = GameObject.find(Crystal.class);
+			if(storage.getCrystal() < 100) {
+				target = GameObject.find(Crystal.class);
+			} else target = GameObject.find(TownHall.class);
 		} else {
-			this.move((Entity) target);
+			if(target instanceof Crystal) {
+				if(this.pos.getDistTo(target.getPos()) > 32)
+					this.move((Entity) target);
+				else if(storage.getCrystal() < 100) {
+					if(alarm[0].getTimer() == -1)
+						storage.addCrystal(10);
+				} else target = null;
+			} else if(target instanceof TownHall) {
+				if(this.pos.getDistTo(target.getPos()) > 32)
+					this.move((Entity) target);
+				else if(storage.getCrystal() > 0) {
+					player.getResources().addCrystal(storage.getCrystal());
+					storage.setCrystal(0);
+				} else target = null;
+			}
 		}
 	}
 
