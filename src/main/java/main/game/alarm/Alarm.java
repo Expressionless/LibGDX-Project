@@ -2,13 +2,13 @@ package main.game.alarm;
 
 public class Alarm {
 	public static final int ALARM_COUNT = 10;
+	public static final int ALARM_INACTIVE = -1;
 
 	private Event action;
-	private int timer = -1;
+	private int timer = ALARM_INACTIVE, startTime;
 	
 	public Alarm() {
 		this.action = null;
-		this.timer = -1;
 	}
 	
 	public Alarm(Event action, int timer) {
@@ -16,26 +16,37 @@ public class Alarm {
 		this.timer = timer;
 	}
 	
+	public void update() {
+		if(timer > 0) {
+			timer--;
+		} else if (timer == 0) {
+			action.event();
+			timer = ALARM_INACTIVE;
+		}
+	}
+	
+	public float percent() {
+		if(isActive() && startTime != 0)
+			return (1f - ((float)timer / (float)startTime));
+		else return 1f;
+	}
+	
 	public void setAction(Event action, int timer) {
 		this.action = action;
-		this.timer = timer;
+		this.setTimer(timer);
 	}
 	
 	public void setTimer(int timer) {
 		this.timer = timer;
+		this.startTime = timer;
 	}
 	
 	public int getTimer() {
 		return timer;
 	}
 	
-	public void update() {
-		if(timer > 0) {
-			timer--;
-		} else if (timer == 0) {
-			action.event();
-			timer = -1;
-		}
+	public boolean isActive() {
+		return (timer != ALARM_INACTIVE);
 	}
 	
 }

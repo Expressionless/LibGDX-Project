@@ -3,6 +3,7 @@ package main.game.entities.resources;
 import java.util.Random;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 import main.game.entities.ResourceNode;
@@ -34,7 +35,7 @@ public class Crystal extends ResourceNode {
 	}
 
 	@Override
-	protected void draw() {
+	protected void draw(SpriteBatch batch) {
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(Color.BLUE);
 

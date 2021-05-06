@@ -3,7 +3,7 @@ package main.game;
 import main.utils.Point;
 
 public abstract class Entity extends GameObject {
-	
+
 	protected float width, height;
 	protected UnitStats stats;
 
@@ -11,28 +11,31 @@ public abstract class Entity extends GameObject {
 		super(sprite, pos);
 		stats = new UnitStats();
 	}
-	
+
+	public boolean hasMet(GameObject other) {
+		float dist = this.getPos().getDistTo(other.getPos());
+		return dist < 32;
+	}
+
 	public void move(Point coord) {
 		float max = stats.getStat("maxSpeed");
 		Point unitVec = pos.getUnitVector(coord);
-		
+
 		pos.setX(pos.getX() + unitVec.getX() * max);
 		pos.setY(pos.getY() + unitVec.getY() * max);
 	}
-	
-	public void move(Entity other) {
+
+	public void move(GameObject other) {
 		this.move(other.pos);
 	}
-	
+
 	protected class UnitStats {
-		
+
 		private float speed = 0, maxSpeed = 1.5f;
 		private float acc = 0;
 		private float defence;
 		private float attack;
-		
-		private float dickLength;
-		
+
 		public void setStat(String stat, float val) {
 			try {
 				UnitStats.class.getDeclaredField(stat).set(this, val);
@@ -40,16 +43,16 @@ public abstract class Entity extends GameObject {
 				e.printStackTrace();
 			}
 		}
-		
+
 		public float getStat(String stat) {
 			try {
 				return UnitStats.class.getDeclaredField(stat).getFloat(this);
 			} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
 				e.printStackTrace();
 			}
-			
+
 			return -1;
 		}
 	}
-	
+
 }

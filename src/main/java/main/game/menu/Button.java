@@ -1,5 +1,7 @@
 package main.game.menu;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import main.game.GameObject;
 import main.utils.Point;
 
@@ -10,7 +12,7 @@ public class Button extends GameObject {
 	}
 
 	@Override
-	protected void draw() {
+	protected void draw(SpriteBatch batch) {
 		// TODO Auto-generated method stub
 		
 	}

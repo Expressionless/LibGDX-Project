@@ -2,6 +2,8 @@ package main.game;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -13,8 +15,11 @@ public abstract class GameObject {
 	public static final ArrayList<GameObject> OBJECTS = new ArrayList<GameObject>();
 
 	protected static ShapeRenderer shapeRenderer = new ShapeRenderer();
-	
-	protected abstract void draw();
+	protected static BitmapFont font = new BitmapFont();
+	public static void loadFont() {
+		font.setColor(Color.BLACK);
+	}
+	protected abstract void draw(SpriteBatch batch);
 	protected abstract void step();
 
 	protected Point pos;
@@ -36,7 +41,7 @@ public abstract class GameObject {
 		if(sprite != null) {
 			sprite.draw(batch);
 		}
-		draw();
+		draw(batch);
 	}
 	
 	public void update() {
@@ -58,6 +63,7 @@ public abstract class GameObject {
 		this.sprite = s;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static <T extends GameObject> T find(Class<T> searchClass) {
 		for(GameObject object : OBJECTS) {
 			if(searchClass.isInstance(object))

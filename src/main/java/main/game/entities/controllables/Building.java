@@ -2,13 +2,13 @@ package main.game.entities.controllables;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-import main.game.entities.Controllable;
+import main.game.Player;
 import main.utils.Point;
 
-public abstract class Building extends Controllable {
+public abstract class Building extends Unit {
 
-	public Building(Sprite sprite, Point pos) {
-		super(sprite, pos);
+	public Building(Sprite sprite, Player player, Point pos) {
+		super(sprite, player, pos);
 	}
 
 }

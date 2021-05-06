@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import main.game.GameObject;
 import main.game.screens.TestScreen;
 import main.input.Input;
 import main.input.Mouse;
@@ -27,6 +28,7 @@ public class Game extends com.badlogic.gdx.Game {
 		input = new Input(mouse);
 		
 		Gdx.input.setInputProcessor(input);
+		GameObject.loadFont();
 		this.setScreen(new TestScreen());
 	}
 	

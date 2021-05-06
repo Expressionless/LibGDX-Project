@@ -23,7 +23,7 @@ public class TestScreen extends Screen {
 		player = new Player("Steve");
 		worker = new Worker(player, new Point(50, 50));
 		
-		new TownHall(new Point(100, 100));
+		new TownHall(player, new Point(100, 100));
 		
 		new Crystal(new Point( 300, 300));
 	}
