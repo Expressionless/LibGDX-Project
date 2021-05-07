@@ -2,7 +2,6 @@ package main.game;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,11 +13,11 @@ import main.utils.Point;
 public abstract class GameObject {
 	public static final ArrayList<GameObject> OBJECTS = new ArrayList<GameObject>();
 
+	private boolean shouldDispose = false;
+	
 	protected static ShapeRenderer shapeRenderer = new ShapeRenderer();
 	protected static BitmapFont font = new BitmapFont();
-	public static void loadFont() {
-		font.setColor(Color.BLACK);
-	}
+	
 	protected abstract void draw(SpriteBatch batch);
 	protected abstract void step();
 
@@ -70,6 +69,34 @@ public abstract class GameObject {
 				return (T)object;
 		}
 		return null;
-		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <T extends GameObject> T findNearest(Class<T> searchClass) {
+		GameObject current = null;
+		for(GameObject object : OBJECTS) {
+			if(!searchClass.isInstance(object))
+				continue;
+			if(current == null) {
+				current = object;
+				continue;
+			}
+			
+			float dis1 = this.getPos().getDistTo(object.getPos());
+			float dis2 = this.getPos().getDistTo(current.getPos());
+			if(dis1 < dis2)
+				current = object;
+		}
+		if(current != null)
+			return (T)current;
+		else return null;
+	}
+	
+	public boolean toDispose() {
+		return shouldDispose;
+	}
+	
+	public void dispose() {
+		shouldDispose = true;
 	}
 }

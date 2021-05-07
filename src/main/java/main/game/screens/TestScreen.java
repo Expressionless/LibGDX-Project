@@ -24,8 +24,13 @@ public class TestScreen extends Screen {
 		worker = new Worker(player, new Point(50, 50));
 		
 		new TownHall(player, new Point(100, 100));
-		
+
 		new Crystal(new Point( 300, 300));
+		new Crystal(new Point( 300, 200));
+
+		new Crystal(new Point( 100, 500));
+
+		new Crystal(new Point( 50, 40));
 	}
 	
 	@Override
@@ -34,6 +39,10 @@ public class TestScreen extends Screen {
 	
 	@Override
 	public void render(float delta) {
+		GameObject.OBJECTS.removeIf((GameObject object) -> {
+			return object.toDispose();
+		});
+		
 		batch.begin();
 		for(GameObject object : GameObject.OBJECTS) {
 			object.render(batch);

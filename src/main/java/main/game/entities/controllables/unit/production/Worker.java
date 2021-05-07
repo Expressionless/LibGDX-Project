@@ -39,7 +39,7 @@ public class Worker extends Unit {
 				if(!(target instanceof ResourceNode))
 					target = null;
 			if (target == null)
-				target = GameObject.find(Crystal.class);
+				target = this.findNearest(Crystal.class);
 			if (!this.hasMet(target))
 				this.move(target);
 			else {
