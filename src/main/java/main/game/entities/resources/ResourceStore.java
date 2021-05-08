@@ -6,13 +6,36 @@ public class ResourceStore {
 
 	private int[] resources;
 	private int maxStore = 100;
+	public ResourceStore(int[] resources, int maxAmount) {
+		if(resources == null) {
+			resources = this.genNewResources();
+		}
+		if(resources.length != Resource.values().length) {
+			System.err.println("ResourceStore not correctly defined!");
+			resources = this.genNewResources();
+		}
+		
+		this.resources = resources;
+		this.maxStore = maxAmount;
+	}
+	
+	public ResourceStore(int maxAmount) {
+		this(null, maxAmount);
+	}
+	
 	
 	public ResourceStore() {
+		this(null, 100);	
+	}
+	
+	private int[] genNewResources() {
 		resources = new int[Resource.values().length];
 		
 		for(int i = 0; i < resources.length; i++) {
 			resources[i] = 0;
 		}
+		
+		return resources;
 	}
 	
 	public float percent(Resource resource) {

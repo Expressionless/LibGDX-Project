@@ -64,8 +64,15 @@ public class Worker extends Unit {
 				this.harvest(target);
 				this.getStore().transfer(Resource.CRYSTAL, ((Unit) target).getPlayer().getResources());
 			}
-					
 		}
+	}
+	
+	private boolean harvest(GameObject target) {
+		if(!(target instanceof ResourceNode))
+			return false;
+		if(!this.hasMet(target))
+			return false;
+		((ResourceNode) target).transfer(this, 10);
 	}
 
 }
