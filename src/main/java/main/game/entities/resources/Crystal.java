@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
-import main.game.entities.ResourceNode;
 import main.utils.Point;
 
 public class Crystal extends ResourceNode {
@@ -16,8 +15,8 @@ public class Crystal extends ResourceNode {
 
 	private Point[] nodes;
 
-	public Crystal(Point pos) {
-		super(pos);
+	public Crystal(Point pos, int amount) {
+		super(pos, amount);
 
 		initNodes();
 	}

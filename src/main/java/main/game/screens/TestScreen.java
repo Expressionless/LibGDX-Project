@@ -25,12 +25,12 @@ public class TestScreen extends Screen {
 		
 		new TownHall(player, new Point(100, 100));
 
-		new Crystal(new Point( 300, 300));
-		new Crystal(new Point( 300, 200));
+		new Crystal(new Point(300, 300), 100);
+		new Crystal(new Point(300, 200), 100);
 
-		new Crystal(new Point( 100, 500));
+		new Crystal(new Point(100, 500), 100);
 
-		new Crystal(new Point( 50, 40));
+		new Crystal(new Point(50, 40), 100);
 	}
 	
 	@Override

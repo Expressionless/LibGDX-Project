@@ -6,11 +6,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 import main.game.GameObject;
 import main.game.Player;
-import main.game.entities.ResourceNode;
 import main.game.entities.controllables.Unit;
 import main.game.entities.controllables.building.TownHall;
+import main.game.entities.controllables.unit.BasicActions;
 import main.game.entities.resources.Crystal;
 import main.game.entities.resources.Resource;
+import main.game.entities.resources.ResourceNode;
 import main.utils.Point;
 
 public class Worker extends Unit {
@@ -60,6 +61,7 @@ public class Worker extends Unit {
 			if(!this.hasMet(target))
 				this.move(target);
 			else {
+				this.harvest(target);
 				this.getStore().transfer(Resource.CRYSTAL, ((Unit) target).getPlayer().getResources());
 			}
 					
