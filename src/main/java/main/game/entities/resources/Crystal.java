@@ -16,7 +16,7 @@ public class Crystal extends ResourceNode {
 	private Point[] nodes;
 
 	public Crystal(Point pos, int amount) {
-		super(pos, amount);
+		super(pos, Resource.CRYSTAL, amount);
 
 		initNodes();
 	}
@@ -53,11 +53,6 @@ public class Crystal extends ResourceNode {
 		}
 
 		shapeRenderer.end();
-	}
-
-	@Override
-	protected void step() {
-
 	}
 
 }

@@ -23,11 +23,23 @@ public abstract class ResourceNode extends Entity {
 		
 		return store;
 	}
+
+	@Override
+	protected void step() {
+		if(this.getStore().get(type) == 0)
+			this.dispose();
+	}
 	
 	public boolean transfer(Unit target, int amount) {
 		if(!target.getStore().hasRoom(type))
 			return false;
-		target.getStore().add
+		if(this.getStore().get(type) < amount)
+			amount = this.getStore().get(type);
+		
+		target.getStore().add(type, amount);
+		this.getStore().sub(type, amount);
+		
+		return true;
 	}
 	
 	public int getInitAmount() {

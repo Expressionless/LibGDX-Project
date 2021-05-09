@@ -8,7 +8,6 @@ import main.game.GameObject;
 import main.game.Player;
 import main.game.entities.controllables.Unit;
 import main.game.entities.controllables.building.TownHall;
-import main.game.entities.controllables.unit.BasicActions;
 import main.game.entities.resources.Crystal;
 import main.game.entities.resources.Resource;
 import main.game.entities.resources.ResourceNode;
@@ -41,12 +40,14 @@ public class Worker extends Unit {
 					target = null;
 			if (target == null)
 				target = this.findNearest(Crystal.class);
+			if(target == null)
+				return;
 			if (!this.hasMet(target))
 				this.move(target);
 			else {
 				if (!alarm[0].isActive()) {
 					alarm[0].setAction(() -> {
-						this.getStore().add(Resource.CRYSTAL, 10);
+						this.harvest(target);
 						System.out.println(this.getStore().get(Resource.CRYSTAL));
 					}, HARVEST_TIME);
 				}
@@ -61,7 +62,6 @@ public class Worker extends Unit {
 			if(!this.hasMet(target))
 				this.move(target);
 			else {
-				this.harvest(target);
 				this.getStore().transfer(Resource.CRYSTAL, ((Unit) target).getPlayer().getResources());
 			}
 		}
@@ -73,6 +73,8 @@ public class Worker extends Unit {
 		if(!this.hasMet(target))
 			return false;
 		((ResourceNode) target).transfer(this, 10);
+		
+		return true;
 	}
 
 }
